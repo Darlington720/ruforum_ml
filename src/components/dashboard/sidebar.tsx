@@ -16,13 +16,18 @@ import { cn } from "@/lib/utils";
 
 interface SidebarProps {
   onLogout: () => void;
+  onPageChange: (page: string) => void;
+  activePage: string;
 }
 
-export function Sidebar({ onLogout }: SidebarProps) {
-  const [activeItem, setActiveItem] = useState("Dashboard");
+export function Sidebar({ onLogout, onPageChange, activePage }: SidebarProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleSidebar = () => setIsExpanded(!isExpanded);
+
+  const getPageFromPath = (path: string) => {
+    return path.substring(1); // Remove the leading slash
+  };
 
   return (
     <div className={cn("sidebar", isExpanded && "expanded")}>
@@ -55,14 +60,12 @@ export function Sidebar({ onLogout }: SidebarProps) {
         <nav className="space-y-1 px-2 flex-1">
           {NAVIGATION_ITEMS.map((item) => {
             const Icon = getIcon(item.icon);
+            const page = getPageFromPath(item.path);
             return (
               <div
                 key={item.label}
-                className={cn(
-                  "nav-item",
-                  activeItem === item.label && "active"
-                )}
-                onClick={() => setActiveItem(item.label)}
+                className={cn("nav-item", activePage === page && "active")}
+                onClick={() => onPageChange(page)}
               >
                 <Icon className="h-4 w-4" />
                 <span className="nav-item-text text-sm">{item.label}</span>

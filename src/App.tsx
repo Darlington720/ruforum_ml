@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { LoginPage } from '@/pages/login-page';
-import { DashboardPage } from '@/pages/dashboard-page';
-import { Toaster } from '@/components/ui/sonner';
-import './App.css';
+import { useState } from "react";
+import { LoginPage } from "@/pages/login-page";
+import { DashboardPage } from "@/pages/dashboard-page";
+import { Toaster } from "@/components/ui/sonner";
+import "./App.css";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
