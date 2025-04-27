@@ -1,28 +1,25 @@
-import { useState } from 'react';
-import { Sidebar } from '@/components/dashboard/sidebar';
-import { StatsCard } from '@/components/dashboard/stats-card';
-import { BeneficiaryChart } from '@/components/dashboard/beneficiary-chart';
-import { BeneficiaryTable } from '@/components/dashboard/beneficiary-table';
-import { TabsNav } from '@/components/dashboard/tabs-nav';
-import { BENEFICIARY_TABS, BENEFICIARY_TYPES } from '@/lib/constants';
-import { KPIContent } from '@/components/dashboard/kpi-content';
-import { ActivityContent } from '@/components/dashboard/activity-content';
-import { BudgetContent } from '@/components/dashboard/budget-content';
+import { useState } from "react";
+import { StatsCard } from "@/components/dashboard/stats-card";
+import { BeneficiaryChart } from "@/components/dashboard/beneficiary-chart";
+import { BeneficiaryTable } from "@/components/dashboard/beneficiary-table";
+import { TabsNav } from "@/components/dashboard/tabs-nav";
+import { BENEFICIARY_TABS, BENEFICIARY_TYPES } from "@/lib/constants";
+import { KPIContent } from "@/components/dashboard/kpi-content";
+import { ActivityContent } from "@/components/dashboard/activity-content";
+import { BudgetContent } from "@/components/dashboard/budget-content";
+import { Button } from "@/components/ui/button";
+import { Filter, FileText, Plus } from "lucide-react";
 
-interface DashboardPageProps {
-  onLogout: () => void;
-}
-
-export function DashboardPage({ onLogout }: DashboardPageProps) {
-  const [activeTab, setActiveTab] = useState('beneficiary');
+export function DashboardPage() {
+  const [activeTab, setActiveTab] = useState("beneficiary");
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'kpi':
+      case "kpi":
         return <KPIContent />;
-      case 'activity':
+      case "activity":
         return <ActivityContent />;
-      case 'budget':
+      case "budget":
         return <BudgetContent />;
       default:
         return (
@@ -39,15 +36,17 @@ export function DashboardPage({ onLogout }: DashboardPageProps) {
                 />
               ))}
             </div>
-            
+
             <div className="mt-6 grid grid-cols-12 gap-6">
               <div className="col-span-12 lg:col-span-4">
                 <div className="bg-white rounded-lg p-6 shadow-sm">
-                  <h2 className="text-lg font-semibold mb-4">Beneficiary Distribution</h2>
+                  <h2 className="text-lg font-semibold mb-4">
+                    Beneficiary Distribution
+                  </h2>
                   <BeneficiaryChart />
                 </div>
               </div>
-              
+
               <div className="col-span-12 lg:col-span-8">
                 <div className="bg-white rounded-lg p-6 shadow-sm">
                   <div className="flex justify-between items-center mb-4">
@@ -61,7 +60,10 @@ export function DashboardPage({ onLogout }: DashboardPageProps) {
                         <FileText className="h-4 w-4 mr-2" />
                         Export
                       </Button>
-                      <Button size="sm" className="h-8 bg-amber-600 hover:bg-amber-700">
+                      <Button
+                        size="sm"
+                        className="h-8 bg-amber-600 hover:bg-amber-700"
+                      >
                         <Plus className="h-4 w-4 mr-2" />
                         Add Beneficiary
                       </Button>
@@ -77,28 +79,13 @@ export function DashboardPage({ onLogout }: DashboardPageProps) {
   };
 
   return (
-    <div className="dashboard-container">
-      <Sidebar onLogout={onLogout} />
-      
-      <div className="main-content">
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold mb-1">Dashboard</h1>
-          <p className="text-muted-foreground">
-            RUFORUM Monitoring, Evaluation, and Learning Database
-          </p>
-        </div>
-        
-        <TabsNav
-          tabs={BENEFICIARY_TABS}
-          activeTab={activeTab}
-          onChange={setActiveTab}
-        />
-        
-        {renderContent()}
-      </div>
-    </div>
+    <>
+      <TabsNav
+        tabs={BENEFICIARY_TABS}
+        activeTab={activeTab}
+        onChange={setActiveTab}
+      />
+      {renderContent()}
+    </>
   );
 }
-
-import { Button } from '@/components/ui/button';
-import { Filter, FileText, Plus } from 'lucide-react';
