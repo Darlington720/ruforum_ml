@@ -2,6 +2,10 @@ import { useState } from "react";
 import { LoginPage } from "@/pages/login-page";
 import { DashboardPage } from "@/pages/dashboard-page";
 import { ProjectList } from "@/components/project/project-list";
+import { PartnerList } from "@/components/partners/partner-list";
+import { ScorecardContent } from "@/components/scorecard/scorecard-content";
+import { ReportsContent } from "@/components/reports/reports-content";
+
 import { Toaster } from "@/components/ui/sonner";
 import { ROUTES } from "@/lib/constants";
 import { Sidebar } from "@/components/dashboard/sidebar";
@@ -33,6 +37,12 @@ function App() {
     switch (currentPage) {
       case "projects":
         return <ProjectList />;
+      case "partners":
+        return <PartnerList />;
+      case "scorecard":
+        return <ScorecardContent />;
+      case "reports":
+        return <ReportsContent />;
       default:
         return (
           <div className="main-content">
